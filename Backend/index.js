@@ -34,7 +34,7 @@ app.use("/user",userRouter);
 // const Todo=mongoose.model('Todo',todoSchema);
 
 // Setting connection with the database.
-mongoose.connect('mongodb+srv://mongo:Krishan123@todo.wryww.mongodb.net/',{useNewUrlParser:true,useUnifiedTopology:true,dbName:'todo'})
+mongoose.connect('mongodb+srv://mongo:Krishan123@todo.jcyit7z.mongodb.net/',{useNewUrlParser:true,useUnifiedTopology:true,dbName:'todo'})
 // (err)=>{
 //     if(err) console.log(err.message);
 //     else console.log("Successfully connected.")

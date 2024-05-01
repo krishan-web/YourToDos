@@ -1,7 +1,12 @@
 import React,{useState} from 'react'
 import styles from './Update.module.css'
-function Update(props) {
-    
+import {useRecoilValue} from 'recoil';
+import {popUp } from '../Recoil';
+
+function Update() {
+  
+  const popValue=useRecoilValue(popUp);
+
    const [title,setTitle]=useState('');
    const [desc,setDesc]=useState('');
    
@@ -12,7 +17,8 @@ function Update(props) {
     setDesc(event.target.value);
   };
 
-  return (props.trigger)?(
+  return (popValue)?(
+    <div className={styles.container}>
   <div className={styles.form}>
     <div className={styles.title} >
       <label for="title" className="form-label">Title</label>
@@ -22,14 +28,11 @@ function Update(props) {
       <label for="description" className="form-label">Description</label>
       <textarea value={desc} onChange={handleDesc} style={{borderRadius:"15px",padding:"20px",paddingRight:"60px"}} id="description" placeholder='Enter the Description'></textarea>
     </div>
-    {/* <div className={styles.desc}>
-      <label for="Image" className="form-label">Image Link</label>
-      <textarea value={image} onChange={handleImage} style={{borderRadius:"15px",padding:"20px",paddingRight:"60px"}} id="description" placeholder='Enter the Image Link'></textarea>
-    </div> */}
     <div className={styles.btn}>
       <button className='btn btn-success' style={{padding:'10px',width:'90px'}}>Update</button>
     </div>
- </div>):"";
+   </div>
+  </div>):" ";
 }
 
 export default Update

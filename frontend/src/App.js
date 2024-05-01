@@ -5,23 +5,18 @@ import Form from './Components/Form/Form';
 import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import List from './Components/List';
+import List from './Components/List/List';
 import {RecoilRoot} from 'recoil';
 
 
 function App() {
   const [position,setPosition]=useState('false');
-  // const [token,setToken]=useState('');
   
   function positionClick(){
     if(position)setPosition(false);
     else setPosition(true);
   }
-  
-  // function valueset(token){
-  //      setToken(token);
-  // }
-    
+
   return (
     <div>
       <RecoilRoot>

@@ -5,14 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {atom,selector,useRecoilState,useRecoilValue} from 'recoil';
-import Update from './Update/Update';
-function List() {
+import {atom,selector,useSetRecoilState,useRecoilValue} from 'recoil';
+import style from './List.module.css'
+import Update from '../Update/Update';
+import {popUp}  from '../Recoil';
 
+function List() {
+    // const todolist =useRecoilValue(todolist);
     const [todolist,setTodoList]=useState([]);
-    // const setTrigger=useSetRecoilState(false);
-    // const Trigger=useRecoilValue();
-    const [popup,setPopUp]=useState(false);
+    const setPopUp=useSetRecoilState(popUp);
+
     const [arr,setArr]=useState(["https://images.pexels.com/photos/2220337/pexels-photo-2220337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                "https://images.pexels.com/photos/1131774/pexels-photo-1131774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                "https://images.pexels.com/photos/17532476/pexels-photo-17532476/free-photo-of-close-up-of-wolf.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
@@ -52,7 +54,6 @@ function List() {
      // eslint-disable-next-line 
     },[])
 
-  
     function handleDelete(id){
        const token = localStorage.getItem('token');
        fetch("http://localhost:3000/user/delete",{
@@ -94,7 +95,7 @@ function List() {
 //   )
 
   return (
-    <><div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",width:"100%",height:"100%",padding:"30px",marginBottom:"-100%" }}>
+    <><div className={style.box} style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",width:"100%",height:"100%",padding:"30px",marginBottom:"-100%" }}>
      { todolist.length>0?todolist.map((todo)=>{
        return <Card style={{display:"flex",flexDirection:"column",padding:"10px",margin:"10px",width:"27%"}} key={todo.title} >
         <CardMedia component="img" alt="green iguana" height="200" image= {arr[Math.floor(Math.random() * 13)]}/>
@@ -103,13 +104,15 @@ function List() {
           <Typography variant="body2" color="text.secondary">{todo.description}</Typography>
         </CardContent>
         <CardActions style={{display:"flex",justifyContent:"space-between"}}>
-          <Button size="large" onClick={()=>setPopUp(true)}>Update</Button>
+          <Button size="large" onClick={()=>setPopUp(existingpopUp=>true)}>Update</Button>
           <Button size="large" onClick={()=>{handleDelete(todo._id)}}>Delete</Button>
         </CardActions>
       </Card>
       }):"Loading....."}
     </div>
-      <Update style={{position:"absolute"}}trigger={popup}/>
+      <div className={style.update}>
+      <Update/>
+      </div>
       </> 
   )
   
